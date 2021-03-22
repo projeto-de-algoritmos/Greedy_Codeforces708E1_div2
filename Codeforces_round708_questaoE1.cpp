@@ -19,21 +19,18 @@ int calc(int x){
 }
 
 int solve(){
-    int n, k, ans = 1;
+    int n, k, ans = 1, vs[1000000];
     cin >> n >> k;
     set<int> st;
 
     for (int i=0; i<n; i++){
         int x;
         cin >> x;
-        for (auto val: st){
-            if (compara(x, val)){
-                ans++;
-                st.clear();
-                break;
-            }
+        x = calc(x);
+        if (vs[x] == ans){
+            ans++;
         }
-        st.insert(x);
+        vs[x] = ans;
     }
     return ans;
 }
