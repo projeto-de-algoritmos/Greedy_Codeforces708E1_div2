@@ -40,11 +40,12 @@ int solve(){
 void init(){
     bitset<10000> is_prime;
     is_prime.set();
+    primos.push_back(2);
 
-    for (int i=2; i<10000; i++){
+    for (int i=3; i<10000; i+=2){
         if (is_prime[i]){
             primos.push_back(i);
-            for (int j=i+i; j<10000; j+=i){
+            for (int j=3*i; j<10000; j+=2*i){
                 is_prime[j] = 0;
             }
         }
