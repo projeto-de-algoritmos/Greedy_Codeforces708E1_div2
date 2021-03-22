@@ -10,13 +10,15 @@ bool compara(int a, int b){
 }
 
 int calc(int x){
-    int div = 2, ans = 1, cnt;
-    while (x > 1){
+    int ans = 1, cnt;
+
+    for (auto p: primos){
+        if (p > x) break;
         cnt = 0;
-        while (x % div == 0 ) cnt++, x /= div;
-        if (cnt % 2 == 1) ans *= div;
-        div++;
+        while (x % p == 0) cnt++, x/=p;
+        if (cnt&1) ans*=p;
     }
+    ans *= x;
     return ans;
 }
 
@@ -55,6 +57,8 @@ void init(){
 int main(){
     int tt;
     cin >> tt;
+
+    init();
 
     while (tt--){
         auto ans = solve();
