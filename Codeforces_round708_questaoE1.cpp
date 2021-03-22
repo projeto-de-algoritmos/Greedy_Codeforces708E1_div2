@@ -2,6 +2,8 @@
 
 using namespace std;
 
+vector<int> primos;
+
 bool compara(int a, int b){
     int tmp = sqrt(a*b);
     return (tmp*tmp == a*b);
@@ -33,6 +35,20 @@ int solve(){
         vs[x] = ans;
     }
     return ans;
+}
+
+void init(){
+    bitset<10000> is_prime;
+    is_prime.set();
+
+    for (int i=2; i<10000; i++){
+        if (is_prime[i]){
+            primos.push_back(i);
+            for (int j=i+i; j<10000; j+=i){
+                is_prime[j] = 0;
+            }
+        }
+    }
 }
 
 int main(){
