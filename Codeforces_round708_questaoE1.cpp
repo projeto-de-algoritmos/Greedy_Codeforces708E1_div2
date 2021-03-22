@@ -23,7 +23,7 @@ int calc(int x){
 }
 
 int solve(){
-    int n, k, ans = 1, vs[1000000];
+    int n, k, ans = 1;
     cin >> n >> k;
     set<int> st;
 
@@ -31,10 +31,8 @@ int solve(){
         int x;
         cin >> x;
         x = calc(x);
-        if (vs[x] == ans){
-            ans++;
-        }
-        vs[x] = ans;
+        if (st.count(x)) st.clear(), ans++;
+        st.insert(x);
     }
     return ans;
 }
