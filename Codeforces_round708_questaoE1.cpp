@@ -4,63 +4,59 @@ using namespace std;
 
 vector<int> primos;
 
-bool compara(int a, int b){
-    int tmp = sqrt(a*b);
-    return (tmp*tmp == a*b);
-}
+int divide_por_maior_quadrado(int valor){
+    int resposta = 1, contador;
 
-int calc(int x){
-    int ans = 1, cnt;
-
-    for (auto p: primos){
-        if (p > x) break;
-        cnt = 0;
-        while (x % p == 0) cnt++, x/=p;
-        if (cnt&1) ans*=p;
+    for (auto primo: primos){
+        if (primo > valor) break;
+        contador = 0;
+        while (valor % primo == 0) contador++, valor/=primo;
+        if (contador % 2 == 1) resposta = resposta * primo;
     }
-    ans *= x;
-    return ans;
+    resposta = resposta * valor;
+    return resposta;
 }
 
-int solve(){
-    int n, k, ans = 1;
-    cin >> n >> k;
-    set<int> st;
+int resolve(){
+    int tamanho_vetor, qtde_mudanca, resposta = 1;
+    cin >> tamanho_vetor >> qtde_mudanca;
 
-    for (int i=0; i<n; i++){
-        int x;
-        cin >> x;
-        x = calc(x);
-        if (st.count(x)) st.clear(), ans++;
-        st.insert(x);
+    set<int> grupo_atual;
+
+    for (int i=0; i<tamanho_vetor; i++){
+        int valor;
+        cin >> valor;
+        valor = divide_por_maior_quadrado(valor);
+        if (grupo_atual.count(valor)) grupo_atual.clear(), resposta++;
+        grupo_atual.insert(valor);
     }
-    return ans;
+    return resposta;
 }
 
-void init(){
-    bitset<10000> is_prime;
-    is_prime.set();
+void crivo_erastotones(){
+    bitset<10000> eh_primo;
+    eh_primo.set();
     primos.push_back(2);
 
     for (int i=3; i<10000; i+=2){
-        if (is_prime[i]){
+        if (eh_primo[i]){
             primos.push_back(i);
             for (int j=3*i; j<10000; j+=2*i){
-                is_prime[j] = 0;
+                eh_primo[j] = 0;
             }
         }
     }
 }
 
 int main(){
-    int tt;
-    cin >> tt;
+    int casos_teste;
+    cin >> casos_teste;
 
-    init();
+    crivo_erastotones();
 
-    while (tt--){
-        auto ans = solve();
-        cout << ans << endl;
+    while (casos_teste--){
+        auto resposta = resolve();
+        cout << resposta << endl;
     }
 
     return 0;
