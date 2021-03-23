@@ -1,6 +1,6 @@
 # Codeforces round 708 questão E1
 
-**Número da Lista**: X<br>
+**Número da Lista**: 3<br>
 **Conteúdo da Disciplina**: Greedy<br>
 
 ## Alunos
